@@ -1,0 +1,139 @@
+{% extends 'source.html' %}
+
+{% load static %}
+
+{% block contenu %}
+              <style>
+    body{
+      background-color: gray;
+    }
+    #back{
+      left: 300px;
+      top: 100px;
+      width: 400px;
+      height: 200px;
+    }
+    body {
+    color:black;
+    background-color:white;
+    background-image:url({% static 'images/1.jpg' %});
+}
+ #choix{
+   color: blue;
+ }
+ #choixs{
+   color: blue;
+ }
+
+</style>
+
+
+<center>
+
+<table class="tb">
+<div class="card card-body" id="back">
+<form action="" method="POST">
+  {% csrf_token %}
+    <p>On vous souhaite la bienvenue dans la page des liasons entre parents et enfants</p>
+   <div class="modal-footer">
+       <a class="btn btn-success" href="{% url 'liste_enfant' %}">Liste enfants</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Ajouter</button>
+    </div>
+ </form>
+</div>
+</table>
+</center>
+
+
+
+
+<!-- ----------------------   Partie d'enregistrement  --------------------------------- -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Liaison entre parent et enfant </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <form action="{% url 'ajout_enfant' %}" method="POST" >
+                  {% csrf_token %}
+                   <select class="form-select" name="nom_mere" aria-label="Default select example">
+                      <option selected>Choisissez une mère</option>
+                      {% for p in individus %}
+                       <option id="choix" value="{{p.id}}">{{p.nom}} {{p.prenom}}</option>
+                      {% endfor %}
+                   </select>
+                     <br>
+                   <select class="form-select" name="nom_enfant" aria-label="Default select example">
+                      <option selected>Choisissez un/une enfant</option>
+                      {% for e in enfants %}
+                      <option id="choixs" value="{{e.id}}">{{e.nom}} {{e.prenom}}</option>
+                      {% endfor %}
+                   </select>
+
+<!--                  <div class="dropdown">-->
+<!--                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                    Choisissez une mère-->
+<!--                  </button>-->
+<!--                  <di class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--                      {% for i in individus %}-->
+<!--                         <input type="checkbox" name="" value="{{i.id}}" placeholder="identification" class="chkvalues">{{i.nom}} {{i.prenom}}<br>-->
+<!--                      {% endfor %}-->
+<!--                  </di>-->
+<!--                  <input type="text" id="txtdisplay" placeholder="identification" name="nom_mere" readonly>-->
+<!--                <br>-->
+<!--                <br>-->
+
+<!--                 <div class="dropdown">-->
+<!--                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                    Choisissez un enfant-->
+<!--                  </button>-->
+<!--                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--                      {% for h in enfants %}-->
+<!--                         <input type="checkbox" value="{{h.id}}" class="chkvalues2">{{h.nom}} {{h.prenom}}<br>-->
+<!--                      {% endfor %}-->
+<!--                  </div>-->
+<!--                  <input type="text" id="txtdisplay2" placeholder="identification" name="nom_enfant" readonly>-->
+<!--                     <br>-->
+<!--                     <br>-->
+
+                   <div class="modal-footer">
+                         <a href="{% url 'ajout' %}" style="padding: 8px; float: right; background-color: white; color: white;"><img src="{% static 'images/plus.png' %}"></a>
+                        <a class="btn btn-secondary" href="{% url 'liste_enfant' %}" style="padding: 8px; float: right; background-color: gray; color: white;">Fermer</a>
+                         <button type="submit" class="btn btn-primary" id="submitbtn">Valider</button>
+                   </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+<script>
+    $(document).ready(function(){
+      $('.chkvalues').click(function(){
+        var txt = ""
+        $('.chkvalues:checked').each(function(){
+         txt+=$(this).val()+",";
+        })
+        txt = txt.substring(0, txt.length-1);
+        $('#txtdisplay').val(txt)
+      });
+
+      $('.chkvalues2').click(function(){
+        var txt = ""
+        $('.chkvalues2:checked').each(function(){
+         txt+=$(this).val()+",";
+        })
+        txt = txt.substring(0, txt.length-1);
+        $('#txtdisplay2').val(txt)
+      });
+
+    });
+</script>
+
+{% endblock %}

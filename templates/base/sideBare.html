@@ -1,0 +1,32 @@
+{% load static %}
+<ul class="sidebar navbar-nav">
+    <img src="{% static 'images/vanilla3.gif' %}">
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'acceuil' %}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>La famille</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'ajout_enfant' %}">
+            <i class="fas fa-fw fa-database"></i>
+            <span>Enfants</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'mariage' %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Les mariés</span>
+        </a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Déconnexion</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <a class="dropdown-item" href="{% url 'test_acceuil' %}">Déconnecter</a>
+        </div>
+    </li>
+
+</ul>

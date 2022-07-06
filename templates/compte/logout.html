@@ -1,0 +1,15 @@
+{% extends 'Acceuil/acceuil_page.html' %}
+{% load static %}
+{% block contenu %}
+
+   <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">On espère que vous etes satisfait d'utiliser cette application.</h5>
+        <p class="card-text">
+            Merci pour votre participation, On vous assure que toute votre travaille serront bien sauvegardés.
+        </p>
+        <br><hr><a href="{% url 'test_acceuil' %}" class="btn btn-primary">Déconnecter</a>
+        </div>
+   </div>
+
+{% endblock %}

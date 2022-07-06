@@ -1,0 +1,25 @@
+<div class="input-group mb-3">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Selecte Sex</button>
+    <ul class="dropdown-menu">
+        <input type="checkbox" class="chkvalues" value="Homme">Homme<br/>
+        <input type="checkbox" class="chkvalues" value="Femme">Femme<br/>
+        <input type="checkbox" class="chkvalues" value="Garcon">Garçon<br/>
+        <input type="checkbox" class="chkvalues" value="Fille">Fille<br/>
+    </ul>
+    <input type="text" name="sex" id="txt_display" class="form-control" aria-label="Text input with dropdown button">
+</div>
+
+       <script>
+           $(document).ready(function()
+           {
+             $('.chkvalues').click(function()
+             {
+               var txt = ""
+               $('.chkvalues:checked').each(function()
+               {
+                txt+=$(this).val()+",";
+               });
+               $('#txt_display').val(txt);
+             });
+           });
+       </script>

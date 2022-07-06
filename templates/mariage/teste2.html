@@ -1,0 +1,128 @@
+{% extends 'source.html' %}
+
+{% load static %}
+
+{% block contenu %}
+
+<style>
+    #back{
+      background-color: white;
+      width: 600px;
+      height: 300px;
+      top:80px;
+      left: 200px;
+    }
+    h3{
+      background-color:rgb(192, 192, 192);
+    }
+    body{
+       background-color:gray;
+    }
+
+    .dp{
+       top: 20px;
+    }
+        body {
+    color:black;
+    background-color:white;
+    background-image:url({% static 'images/1.jpg' %});
+}
+
+
+</style>
+
+
+<center>
+
+<table class="tb">
+<div class="card card-body" id="back">
+<form action="" method="POST">
+  {% csrf_token %}
+    <h3>Veuillez confirmer bien votre choix précedent si vous plait.</h3>
+    <br>
+    <br>
+   <div class="dp">
+     <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        Choisissez un homme
+      </button>
+      <di class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          {% for h in homme %}
+             <input type="checkbox" name="id" value="{{h.id}}" class="chkvalues2">{{h.nom}} {{h.prenom}}<br>
+          {% endfor %}
+      </di>
+
+      <input type="text" id="txtdisplay2" placeholder="identification" name="id_ep" readonly>
+
+       <br>
+       <br>
+     <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Choisissez une femme
+      </button>
+      <di class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          {% for i in femme %}
+             <input type="checkbox" name="" value="{{i.id}}" placeholder="identification" class="chkvalues">{{i.nom}} {{i.prenom}}<br>
+          {% endfor %}
+      </di>
+      <input type="text" id="txtdisplay" placeholder="identification" name="id_ep" readonly>
+    <br>
+    <br>
+
+     <div>
+      <button type="submit" class="btn btn-primary" id="submitbtn">Enregistrer</button>
+     </div>
+   </div>
+</form>
+</div>
+</table>
+</center>
+
+<!--<form method="POST">-->
+<!--  {% csrf_token %}-->
+<!--  <div class="dropdown">-->
+<!--      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--        Selecte Nom-->
+<!--      </button>-->
+<!--      <di class="dropdown-menu" aria-labelledby="dropdownMenuButton1">-->
+<!--          <input type="checkbox" value="Java" class="chkvalues">Java<br>-->
+<!--          <input type="checkbox" value="JQuery" class="chkvalues">JQuery<br>-->
+<!--          <input type="checkbox" value="MVC" class="chkvalues">MVC<br>-->
+<!--          <input type="checkbox" value="Javasript" class="chkvalues">Javasript<br>-->
+<!--          <input type="checkbox" value="PHP" class="chkvalues">PHP<br>-->
+<!--          <input type="checkbox" value="Csharp" class="chkvalues">Csharp<br>-->
+<!--      </di>-->
+<!--      <input type="text" id="txtdisplay" name="nom" readonly>-->
+<!--      <input type="submit" value="Ajouter" class="btn btn-secondary"/>-->
+<!--</div>-->
+<!--     <hr/>-->
+<!--    {% if messages %}-->
+<!--    {% for result in messages %}-->
+<!--    <h4 style="color:green;">{{result}}</h4>-->
+<!--    {% endfor %}-->
+<!--    {% endif %}-->
+</form>
+<script>
+    $(document).ready(function(){
+      $('.chkvalues').click(function(){
+        var txt = ""
+        $('.chkvalues:checked').each(function(){
+         txt+=$(this).val()+",";
+        })
+        txt = txt.substring(0, txt.length-1);
+        $('#txtdisplay').val(txt)
+      });
+
+      $('.chkvalues2').click(function(){
+        var txt = ""
+        $('.chkvalues2:checked').each(function(){
+         txt+=$(this).val()+",";
+        })
+        txt = txt.substring(0, txt.length-1);
+        $('#txtdisplay2').val(txt)
+      });
+
+    });
+</script>
+
+{% endblock %}

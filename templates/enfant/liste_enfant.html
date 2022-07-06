@@ -1,0 +1,57 @@
+{% extends 'source.html' %}
+
+{% load static %}
+
+{% block contenu %}
+<style>
+    body{
+      background-color: gray;
+    }
+</style>
+
+ <div id="content-wrapper">
+
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Parent et Enfant</a>
+                </li>
+                <li class="breadcrumb-item active">Listes</li>
+            </ol>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Listes des parents et enfants
+                        <a href="{% url 'ajout_enfant' %}" style="float: right; background-color: white;"><img src="{% static 'images/add_f.png' %}"></a>
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                         <thead>
+                            <tr>
+                                <th>Nom_mere</th>
+                                <th>Nom_enfant</th>
+                                <th>Actions</th>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            {% for enfant in enfant %}
+                               <tr>
+                                        <th><a href="{% url 'acceuil' %}">{{ enfant.nom_mere }}</a></th>
+                                        <th>{{ enfant.nom_enfant }}</th>
+                                        <th>
+                                            <a class="btn btn-sm btn-danger" href="{% url 'supprime' enfant.id %}"><span class="fa fa-trash"></span> Suprimer</a>
+                                        </th>
+                               </tr>
+                            {% endfor %}
+                         </tbody>
+                    </table>
+                </div>
+ {% endblock %}
